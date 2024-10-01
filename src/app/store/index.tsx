@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { TDirectoryItem } from '../app/types'
+import { TDirectoryItem } from '@/app/types'
 // import { getImagesList } from '../actions/imagesList'
 
 interface FAlbumState {

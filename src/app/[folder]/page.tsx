@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import { useFAlbumStore } from '@/store';
+// import { ImageAsync } from '../components/ImageAsync';
 import Image from 'next/image';
 
 const Page = () => {
@@ -18,6 +19,11 @@ const Page = () => {
           alt={image.name}
           width={200}
           height={200}
+          data-loaded='false'
+          onLoad={event => {
+            event.currentTarget.setAttribute('data-loaded', 'true')
+          }}
+          className='data-[loaded=false]:animate-pulse data-[loaded=false]:bg-gray-100/10'
         />
       ))}
     </main>

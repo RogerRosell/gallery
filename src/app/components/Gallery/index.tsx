@@ -9,7 +9,7 @@ export const Gallery = ({ tree }: { tree: TDirectoryItem[] }) => {
   if (!folders) setFolders(tree);
 
   return (
-    <div className='flex flex-col gap-4 p-32'>
+    <div className='flex flex-col gap-4'>
       {folders && folders.map((folder: TDirectoryItem) => (
         <Album key={folder.name} folder={folder} />
       ))}

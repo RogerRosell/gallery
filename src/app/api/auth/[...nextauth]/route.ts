@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 // import Github from "next-auth/providers/github";
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -12,6 +12,7 @@ export const authOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
+        console.log("req", req);
         const user = (credentials?.username === "pony" && credentials?.password === "pony") 
         ?
         { id: "1", name: "AuthOk!" }
@@ -28,6 +29,6 @@ export const authOptions = {
   ],
 };
 
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

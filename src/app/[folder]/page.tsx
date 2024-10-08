@@ -7,12 +7,14 @@ import Image from 'next/image';
 
 const Page = () => {
   const { folder } = useParams()
-  const { folders } = useFAlbumStore()
+  const { folders } = useFAlbumStore();
+  // console.log("folders", folders)
+  // if (!folders) setFolders(folders);
   const images = folders?.filter((item: { name: string }) => item.name === folder) || [];
   const imagesList = images[0]?.children || [];
   return (
     <main className='flex gap-12 p-32'>
-      {imagesList && imagesList.map((image) => (
+      {imagesList && imagesList?.map((image) => (
         <Image
           key={image.name}
           src={`/gallery-images/${folder}/${image.name}`}

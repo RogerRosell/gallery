@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { getServerSession } from 'next-auth';
-import SessionProvider from '@/app/components/SessionProvider';
-import NavMenu from '@/app/components/NavMenu';
+import SessionProvider from '@/components/SessionProvider';
+import NavMenu from '@/components/NavMenu';
 
 
 const geistSans = localFont({

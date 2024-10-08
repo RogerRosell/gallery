@@ -1,7 +1,7 @@
 import React from 'react'
 import { TDirectoryItem } from '@/app/types'
 import Link from 'next/link';
-import OpenFolderIcon from '@/app/components/SVG/OpenFolderIcon';
+import OpenFolderIcon from '@/components/SVG/OpenFolderIcon';
 
 const Album = ({ folder }: { folder: TDirectoryItem }): JSX.Element => {
   return (

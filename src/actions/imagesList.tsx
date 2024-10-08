@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import { TDirectoryItem } from '../app/types';
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const exiftool = require("exiftool-vendored").exiftool
+// import fs from 'fs';
+// import path from 'path';
+// import { TDirectoryItem } from '../app/types';
+// // eslint-disable-next-line @typescript-eslint/no-require-imports
+// const exiftool = require("exiftool-vendored").exiftool
 // import { Image } from 'next/image';
 
 //  const getImageData = async (imagePath: string) => {

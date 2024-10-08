@@ -1,5 +1,5 @@
 import { getFilterData } from '@/actions';
-import { getUniqueKeywords, getFullGalleryList } from '@/actions/galleryList';
+import { getUniqueKeywords } from '@/actions/galleryList';
 import { getImagesList } from '@/actions/galleryList';
 import { getServerSession } from 'next-auth';
 import { FilterSelect } from '@/components/FilterSelect';

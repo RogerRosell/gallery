@@ -81,6 +81,7 @@ export function getImageFilterData(item: string) {
 export const getImagesList = async () => {
   const tree = await getFullGalleryList();
   const images: TImage[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tree.forEach((item: TImage | any) => {
     item.children.forEach((element: TImage) => {
       if (element.type === 'file') {

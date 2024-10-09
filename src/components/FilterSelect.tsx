@@ -5,16 +5,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { TFilter } from "@/dataModel/filter"
 
-export function FilterSelect({ id, value }: TFilter) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function FilterSelect({ id, values, onChangeHandler }: any) {
   return (
-    <Select data-id={id}>
+    <Select data-id={id} onValueChange={(value) => onChangeHandler(id, value)}>
     <SelectTrigger className="w-[180px]">
       <SelectValue placeholder={id.charAt(0).toUpperCase() + id.slice(1)} />
     </SelectTrigger>
-    <SelectContent>
-      {value.map((item) => (
+    <SelectContent >
+      {values.map((item: string) => (
         <SelectItem key={item} value={item}>
           {item.replace(/_/g, " ")}
         </SelectItem>

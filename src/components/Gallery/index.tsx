@@ -1,18 +1,30 @@
 "use client";
 
-import { TDirectoryItem } from '@/app/types';
 import { useFAlbumStore } from '@/store';
-import Album from '@/components/Album';
+import Image from 'next/image';
 
-export const Gallery = ({ tree }: { tree: TDirectoryItem[] }) => {
-  const { setInitTree, folders } = useFAlbumStore();
-  if (!folders) setInitTree(tree);
+const getFolderFromImageName = (name: string) => {
+  const folder = name.split("-")
+  folder.pop();
+  return folder.join("-");
+}
+
+export const Gallery = () => {
+  const filteredImages = useFAlbumStore((state) => state.filteredImages);
 
   return (
-    <div className='flex flex-col gap-4'>
-      {folders && folders.map((folder: TDirectoryItem) => (
-        <Album key={folder.name} folder={folder} />
-      ))}
-    </div>
+    <div className="flex gap-4 flex-wrap pt-12">
+      {filteredImages && filteredImages.length > 0 &&
+        filteredImages.map((image) => {
+          const folder = getFolderFromImageName(image.name);
+          return (
+            <div key={image.name} style={{ position: 'relative', width: '250px', height: '250px' }}>
+              <Image alt={image.name} src={`/gallery-images/${folder}/${image.name}`} sizes='250' fill style={{
+                objectFit: 'contain',
+              }} />
+            </div>
+          )
+        })
+      }</div>
   )
 }

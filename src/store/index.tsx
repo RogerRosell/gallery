@@ -1,23 +1,36 @@
 import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-import { TDirectoryItem } from '@/app/types'
-// import { getImagesList } from '../actions/imagesList'
+import { devtools } from 'zustand/middleware'
+import { immer } from 'zustand/middleware/immer'
+// import { filterImagesByKeywords } from '@/store/filterUtils'
+import { TImage } from '@/dataModel/image'
 
-interface FAlbumState {
-  folders : TDirectoryItem[] | undefined;
-  setInitTree: (response: TDirectoryItem[]) => void
+type FAlbumState =  {
+  directoryTree : object;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  filterData: any;
+  keywords: string[];
+  allImages: TImage[];
+  filteredImages: TImage[];
 }
 
-export const useFAlbumStore = create<FAlbumState>()(
+type FAlbumActions = {
+  resetFilteredImages : () => void;
+}
+
+export type FAlbumStore = FAlbumState & FAlbumActions;
+
+
+export const useFAlbumStore = create<FAlbumStore>()(
   devtools(
-    persist(
-      (set) => ({
-        folders : undefined,
-        setInitTree: (response) => {
-          if (response) set({ folders: response });
-        }
-      }),
-      { name: 'fAlbumStore' }
+    immer(
+      (set, get) => ({
+        directoryTree: {},
+        filterData: {},
+        keywords: [],
+        allImages: [],
+        filteredImages: [],
+        resetFilteredImages: () => set({ filteredImages: get().allImages })
+      })
     ),
   ),
 )

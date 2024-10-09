@@ -8,11 +8,15 @@ import { getImagesList } from '@/actions/galleryList';
 import AppInitialiser from './utils/AppInitialiser';
 
 export default async function Home() {
-  try {
-    const filterData = getFilterData();
-    const keywords = await getUniqueKeywords();
-    const images = await getImagesList();
-    const initTree = await getFullGalleryList();
+  const filterData = getFilterData();
+  let keywords 
+  let images 
+  let initTree
+  try {    
+    keywords = await getUniqueKeywords();
+    images = await getImagesList();
+    initTree = await getFullGalleryList();
+  } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
   // try {
     // const session = await getServerSession();
     return (
@@ -40,6 +44,4 @@ export default async function Home() {
         // )}*/}
       </main>
     );
-  } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
-
 }

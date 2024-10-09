@@ -22,7 +22,8 @@ export default async function Home() {
     return (
       <main className=''>
         {/* {session?.user?.name ? ( */}
-        <AppInitialiser 
+        {keywords && images && initTree && (
+          <AppInitialiser 
             initTree={initTree}
             filterData={filterData}
             keywords={keywords}
@@ -36,6 +37,8 @@ export default async function Home() {
             <Gallery />
           </div>
           </AppInitialiser>
+        )}
+        
         {/*// ) : (
         //   <div>
         //     <h1>Family Gallery</h1>

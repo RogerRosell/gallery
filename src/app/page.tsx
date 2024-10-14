@@ -11,16 +11,17 @@ import { getServerSession } from 'next-auth';
 export default async function Home() {
   try {
     const session = await getServerSession();
+    const keywords = await getUniqueKeywords();
+    const images = await getImagesList();
+    const initTree = await getFullGalleryList();
 
-  const filterData = getFilterData();
-  let keywords 
-  let images 
-  let initTree
-  try {    
-    keywords = await getUniqueKeywords();
-    images = await getImagesList();
-    initTree = await getFullGalleryList();
-  } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
+    const filterData = getFilterData();
+ 
+  // try {    
+  //   keywords = await getUniqueKeywords();
+  //   images = await getImagesList();
+  //   initTree = await getFullGalleryList();
+  // } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
     
     return (
       <main className=''>
@@ -51,15 +52,4 @@ export default async function Home() {
     );
     
   } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
-  // const filterData = getFilterData();
-  // let keywords 
-  // let images 
-  // let initTree
-  // try {    
-  //   keywords = await getUniqueKeywords();
-  //   images = await getImagesList();
-  //   initTree = await getFullGalleryList();
-  // } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
-  // try {
-    // const session = await getServerSession();
 }

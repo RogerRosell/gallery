@@ -1,7 +1,14 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from "next-auth/providers/credentials";
+import dotenv from 'dotenv';
 
+dotenv.config();
 // import Github from "next-auth/providers/github";
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
+
+console.log("username", username);
+console.log("password", password);
 
 const authOptions = {
   providers: [
@@ -13,7 +20,7 @@ const authOptions = {
       },
       async authorize(credentials, req) {
         console.log("req", req);
-        const user = (credentials?.username === "pony" && credentials?.password === "pony") 
+        const user = (credentials?.username === username && credentials?.password === password) 
         ?
         { id: "1", name: "AuthOk!" }
         : 

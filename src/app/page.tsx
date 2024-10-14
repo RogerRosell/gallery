@@ -6,8 +6,12 @@ import { getFilterData } from '@/actions';
 import { getUniqueKeywords, getFullGalleryList } from '@/actions/galleryList';
 import { getImagesList } from '@/actions/galleryList';
 import AppInitialiser from './utils/AppInitialiser';
+import { getServerSession } from 'next-auth';
 
 export default async function Home() {
+  try {
+    const session = await getServerSession();
+
   const filterData = getFilterData();
   let keywords 
   let images 
@@ -17,12 +21,11 @@ export default async function Home() {
     images = await getImagesList();
     initTree = await getFullGalleryList();
   } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
-  // try {
-    // const session = await getServerSession();
+    
     return (
       <main className=''>
-        {/* {session?.user?.name ? ( */}
-        {keywords && images && initTree && (
+        {session?.user?.name ? (
+        keywords && keywords.length > 0 && images && images.length > 0 && initTree && (
           <AppInitialiser 
             initTree={initTree}
             filterData={filterData}
@@ -37,14 +40,26 @@ export default async function Home() {
             <Gallery />
           </div>
           </AppInitialiser>
-        )}
-        
-        {/*// ) : (
-        //   <div>
-        //     <h1>Family Gallery</h1>
-        //     <p>Sign in to see the gallery</p>
-        //   </div>
-        // )}*/}
+        )) : (
+            <div>
+            <h1>Family Gallery</h1>
+            <p>Sign in to see the gallery</p>
+          </div>
+        )
+      }
       </main>
     );
+    
+  } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
+  // const filterData = getFilterData();
+  // let keywords 
+  // let images 
+  // let initTree
+  // try {    
+  //   keywords = await getUniqueKeywords();
+  //   images = await getImagesList();
+  //   initTree = await getFullGalleryList();
+  // } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
+  // try {
+    // const session = await getServerSession();
 }

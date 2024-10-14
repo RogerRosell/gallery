@@ -15,7 +15,7 @@ export default async function Home() {
     const images = await getImagesList();
     const initTree = await getFullGalleryList();
 
-    const filterData = getFilterData();
+    const filterData = getFilterData(images);
  
   // try {    
   //   keywords = await getUniqueKeywords();

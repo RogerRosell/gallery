@@ -14,6 +14,8 @@ type FAlbumState =  {
 }
 
 type FAlbumActions = {
+  setFilterData : (data: object) => void;
+  setFilteredImages : (images: TImage[]) => void;
   resetFilteredImages : () => void;
 }
 
@@ -29,6 +31,8 @@ export const useFAlbumStore = create<FAlbumStore>()(
         keywords: [],
         allImages: [],
         filteredImages: [],
+        setFilterData: (data) => set({ filterData: data }),
+        setFilteredImages: (images) => set({ filteredImages: images }),
         resetFilteredImages: () => set({ filteredImages: get().allImages })
       })
     ),

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FilterSelect } from '@/components/FilterSelect';
 import { useFAlbumStore } from '@/store';
 import ResetFilters from '@/components/SVG/ResetFilters';
-import { filterImagesByKeywords } from '@/store/filterUtils'
+import { filterImagesByKeywords, getFilterData } from '@/store/filterUtils';
 
 type activeFilters = {
     event: string,
@@ -12,24 +12,32 @@ type activeFilters = {
     keywords: string[]
 }
 
-const Filters = () => {
+const Filters = () => {  
+
+  const filterData = useFAlbumStore(state => state.filterData);
+  const allImages = useFAlbumStore(state => state.allImages);
+  const keywords = useFAlbumStore(state => state.keywords); 
+  const filteredImages = useFAlbumStore(state => state.filteredImages);
+  const setFilterData = useFAlbumStore(state => state.setFilterData);
+  const setFilteredImages = useFAlbumStore(state => state.setFilteredImages);
+  const resetFilteredImages = useFAlbumStore(state => state.resetFilteredImages);
+  // filterData && console.log("filterData", filterData);
+
   const [activeFilters, setActiveFilters] = useState<activeFilters>({
     event: "",
     lloc: "",
     any: "",
     keywords: []
   });
-
-  const filterData = useFAlbumStore(state => state.filterData);
-  const keywords = useFAlbumStore(state => state.keywords); 
-  const filteredImages = useFAlbumStore(state => state.filteredImages);
-  const resetFilteredImages = useFAlbumStore(state => state.resetFilteredImages);
   
   const onChangeHandler = (id: string, value: string) => {      
     if (id ==="keywords") {
       const updatedKeywords = activeFilters.keywords.includes(value) ? activeFilters.keywords.filter(keyword => keyword !== value) : [...activeFilters.keywords, value];
       setActiveFilters({...activeFilters, [id]: updatedKeywords});
-      useFAlbumStore.setState(({ filteredImages: filterImagesByKeywords(filteredImages, updatedKeywords) }))
+      setFilteredImages(filterImagesByKeywords(filteredImages, updatedKeywords));
+      setFilterData(getFilterData(filterImagesByKeywords(filteredImages, updatedKeywords)));
+      // useFAlbumStore.setState(({ filteredImages: filterImagesByKeywords(filteredImages, updatedKeywords) }))
+
     } else {
       setActiveFilters({...activeFilters, [id]: value});
     }
@@ -42,7 +50,15 @@ const resetFilters = () => {
     any: "",
     keywords: []
 });
+// setFilterData({
+//   event: "",
+//     lloc: "",
+//     any: "",
+//     keywords: []
+// })
 resetFilteredImages();
+const newFilterData = getFilterData(allImages);
+setFilterData(newFilterData);
 
 return true;
 }

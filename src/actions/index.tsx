@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { join as pathJoin } from 'path';
 import { TFolder } from '@/dataModel/directory';
+import { TImage } from '@/dataModel/image';
 // import { TImage } from '@/dataModel/image';
 import { getImagesList } from './galleryList';
 import { getUniqueKeywords } from './galleryList';
@@ -29,13 +30,12 @@ export function getFolderData(item: string) {
   return folderData
 }
 
-export function getFilterData() {
-  const folderList = getFoldersList('gallery-images');
+export function getFilterData(images: TImage[] = []) {
 
-  const titles = [...new Set(folderList.map((item) => item.title))].sort();
-  const places = [...new Set(folderList.map((item) => item.place))].sort();
-  const months = [...new Set(folderList.map((item) => item.date?.month))].sort();
-  const years = [...new Set(folderList.map((item) => item.date?.year))].sort();
+  const titles = [...new Set(images.map((item) => item.title))].sort();
+  const places = [...new Set(images.map((item) => item.place))].sort();
+  const months = [...new Set(images.map((item) => item.date?.month))].sort();
+  const years = [...new Set(images.map((item) => item.date?.year))].sort();
 
   return { titles, places, months, years };
 }

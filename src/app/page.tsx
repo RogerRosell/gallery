@@ -1,16 +1,16 @@
 // import { getServerSession } from 'next-auth';
 import Filters from '@/components/Filters';
 import { Gallery } from '@/components/Gallery';
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 import { getFilterData } from '@/actions';
 import { getUniqueKeywords, getFullGalleryList } from '@/actions/galleryList';
 import { getImagesList } from '@/actions/galleryList';
 import AppInitialiser from './utils/AppInitialiser';
-import { getServerSession } from 'next-auth';
+// import { getServerSession } from 'next-auth';
 
 export default async function Home() {
   try {
-    const session = await getServerSession();
+    // const session = await getServerSession();
     const keywords = await getUniqueKeywords();
     const images = await getImagesList();
     const initTree = await getFullGalleryList();
@@ -25,8 +25,8 @@ export default async function Home() {
     
     return (
       <main className=''>
-        {session?.user?.name ? (
-        keywords && keywords.length > 0 && images && images.length > 0 && initTree && (
+        {/* {session?.user?.name ? ( */}
+        {keywords && keywords.length > 0 && images && images.length > 0 && initTree && (
           <AppInitialiser 
             initTree={initTree}
             filterData={filterData}
@@ -41,15 +41,14 @@ export default async function Home() {
             <Gallery />
           </div>
           </AppInitialiser>
-        )) : (
+        ) }
+      </main>
+          );
+        {/* )) : (
             <div>
             <h1>Family Gallery</h1>
             <p>Sign in to see the gallery</p>
           </div>
-        )
-      }
-      </main>
-    );
-    
-  } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
+        ) */}    
+  } catch (error) { console.log("error", error) }
 }

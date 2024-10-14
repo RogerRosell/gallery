@@ -7,9 +7,6 @@ dotenv.config();
 const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 
-console.log("username", username);
-console.log("password", password);
-
 const authOptions = {
   providers: [
     CredentialsProvider({

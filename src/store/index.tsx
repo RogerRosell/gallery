@@ -21,7 +21,6 @@ type FAlbumActions = {
 
 export type FAlbumStore = FAlbumState & FAlbumActions;
 
-
 export const useFAlbumStore = create<FAlbumStore>()(
   devtools(
     immer(

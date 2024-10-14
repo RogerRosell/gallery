@@ -57,8 +57,8 @@ const resetFilters = () => {
 //     keywords: []
 // })
 resetFilteredImages();
-const newFilterData = getFilterData(allImages);
-setFilterData(newFilterData);
+// const newFilterData = getFilterData(allImages);
+setFilterData(getFilterData(allImages));
 
 return true;
 }

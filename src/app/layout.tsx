@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { getServerSession } from 'next-auth';
-import SessionProvider from '@/components/SessionProvider';
+// import { getServerSession } from 'next-auth';
+// import SessionProvider from '@/components/SessionProvider';
 import NavMenu from '@/components/NavMenu';
 
 // import { getFilterData } from '@/actions';
@@ -34,7 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  const session = await getServerSession();
+  // const session = await getServerSession();
   // const filterData = getFilterData();
   //   const keywords = await getUniqueKeywords();
   //   const images = await getImagesList();
@@ -44,7 +44,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider session={session}>
+        {/* <SessionProvider session={session}> */}
           <main className="p-32">
             <NavMenu />
             {/* <AppInitialiser 
@@ -57,7 +57,7 @@ export default async function RootLayout({
             {children}
             {/* </AppInitialiser> */}
           </main>          
-          </SessionProvider>
+          {/* </SessionProvider> */}
       </body>
     </html>
   );

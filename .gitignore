@@ -16,9 +16,6 @@
 # production
 /build
 
-# gallery-images
-/public/gallery-images
-
 # misc
 .DS_Store
 *.pem

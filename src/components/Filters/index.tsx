@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FilterSelect } from '@/components/FilterSelect';
 import { useFAlbumStore } from '@/store';
 import ResetFilters from '@/components/SVG/ResetFilters';
-import { filterImagesByKeywords, getFilterData } from '@/store/filterUtils';
+import { filterImagesByKeywords, getFilterData, filterImages } from '@/store/filterUtils';
 
 type activeFilters = {
     event: string,
@@ -39,7 +39,13 @@ const Filters = () => {
       // useFAlbumStore.setState(({ filteredImages: filterImagesByKeywords(filteredImages, updatedKeywords) }))
 
     } else {
-      setActiveFilters({...activeFilters, [id]: value});
+      const newActiveFilters = {...activeFilters, [id]: value};
+      setActiveFilters(newActiveFilters);
+      console.log("newActiveFilters", newActiveFilters);
+      // setActiveFilters({...activeFilters, [id]: value});
+      const newFilteredImages = filterImages(filteredImages, newActiveFilters);
+      setFilteredImages(newFilteredImages);
+      setFilterData(getFilterData(newFilteredImages))
     }
 }
 

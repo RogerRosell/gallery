@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 // import { getServerSession } from 'next-auth';
 // import SessionProvider from '@/components/SessionProvider';
-import NavMenu from '@/components/NavMenu';
+// import NavMenu from '@/components/NavMenu';
 
 // import { getFilterData } from '@/actions';
 // import { getUniqueKeywords, getFullGalleryList } from '@/actions/galleryList';
@@ -46,7 +46,7 @@ export default async function RootLayout({
       >
         {/* <SessionProvider session={session}> */}
           <main className="p-32">
-            <NavMenu />
+            {/* <NavMenu /> */}
             {/* <AppInitialiser 
             initTree={initTree}
             filterData={filterData}

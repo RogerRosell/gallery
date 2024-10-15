@@ -6,6 +6,7 @@ import AppInitialiser from '@/lib/AppInitialiser';
 import { getImagesList, getUniqueKeywords, getFilterData } from '@/lib/filterUtils';
 
 export default async function Home() {
+  try {
   const initTree = await getFullGalleryList();
   const images = initTree && initTree.length > 0 && getImagesList(initTree);
   const keywords = initTree && initTree.length > 0 && getUniqueKeywords(initTree);
@@ -32,4 +33,8 @@ export default async function Home() {
       )}
     </main>
   )
+} catch (error) {
+  console.log("Error >> ", error);
+  return <main><p>There&apos;s been an error</p></main>
+}
 }

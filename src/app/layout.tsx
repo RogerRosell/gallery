@@ -5,10 +5,6 @@ import "./globals.css";
 // import SessionProvider from '@/components/SessionProvider';
 // import NavMenu from '@/components/NavMenu';
 
-// import { getFilterData } from '@/actions';
-// import { getUniqueKeywords, getFullGalleryList } from '@/actions/galleryList';
-// import { getImagesList } from '@/actions/galleryList';
-// import AppInitialiser from './utils/AppInitialiser';
 
 
 
@@ -38,7 +34,7 @@ export default async function RootLayout({
   // const filterData = getFilterData();
   //   const keywords = await getUniqueKeywords();
   //   const images = await getImagesList();
-  //   const initTree = await getFullGalleryList();
+    // const initTree = await getFullGalleryList();
   return (
     <html lang="en">
       <body
@@ -47,13 +43,7 @@ export default async function RootLayout({
         {/* <SessionProvider session={session}> */}
           <main className="p-32">
             {/* <NavMenu /> */}
-            {/* <AppInitialiser 
-            initTree={initTree}
-            filterData={filterData}
-            keywords={keywords}
-            allImages={images}
-            filteredImages={images}
-          > */}
+            
             {children}
             {/* </AppInitialiser> */}
           </main>          

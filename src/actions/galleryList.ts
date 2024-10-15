@@ -56,63 +56,63 @@ export async function getFullGalleryList() {
   }
 }
 
-export function getImageFilterData(item: string) {
-  const imageFilterDataRaw = item.split('-');
-  const title = imageFilterDataRaw[0] || "";
-  const place = imageFilterDataRaw[1] || "";
-  const date = imageFilterDataRaw[2] || "";
-  const month = date && date.split('_')[0] || "";
-  const year = date && date.split('_')[1] || "";
+// export function getImageFilterData(item: string) {
+//   const imageFilterDataRaw = item.split('-');
+//   const title = imageFilterDataRaw[0] || "";
+//   const place = imageFilterDataRaw[1] || "";
+//   const date = imageFilterDataRaw[2] || "";
+//   const month = date && date.split('_')[0] || "";
+//   const year = date && date.split('_')[1] || "";
 
-  const imageFilterData: TImage = {
-    name: item,
-    type: 'file',
-    title: title,
-    place: place,
-    date: {
-      year: year,
-      month: month
-    }
-  }
+//   const imageFilterData: TImage = {
+//     name: item,
+//     type: 'file',
+//     title: title,
+//     place: place,
+//     date: {
+//       year: year,
+//       month: month
+//     }
+//   }
 
-  return imageFilterData
-}
+//   return imageFilterData
+// }
 
-export const getImagesList = async () => {
-  const tree = await getFullGalleryList();
-  const images: TImage[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  tree.forEach((item: TImage | any) => {
-    item.children.forEach((element: TImage) => {
-      if (element.type === 'file') {
-        const imageFilterData = element.name && getImageFilterData(element.name);
-        const image = Object.assign({}, element, imageFilterData);
-        images.push(image);                 
-      }
-    });     
-  });
+// export const getImagesList = async () => {
+//   const tree = await getFullGalleryList();
+//   const images: TImage[] = [];
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   tree.forEach((item: TImage | any) => {
+//     item.children.forEach((element: TImage) => {
+//       if (element.type === 'file') {
+//         const imageFilterData = element.name && getImageFilterData(element.name);
+//         const image = Object.assign({}, element, imageFilterData);
+//         images.push(image);                 
+//       }
+//     });     
+//   });
   
-  return images;
-};
+//   return images;
+// };
 
-export const getUniqueKeywords = async () => {
-  try {
-    const tree = await getFullGalleryList();
-    const keywords_: string[] = [];
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-    tree.forEach((item: TImage | any) => {
-      item.children.forEach((element: TImage) => {
-        if (element.type === 'file' && element.keywords) {
-          if (typeof element.keywords === 'string') keywords_.push(element.keywords);
-          if (Array.isArray(element.keywords)) keywords_.push(...element.keywords);                  
-        }
-      });     
-    });
-    const uniqueKeywords: string[] = [...new Set(keywords_)].sort();  
-    return uniqueKeywords;
-  } catch (err) {
-    console.error('Failed to get unique keywords', err);
-    return ["error"];
-  }
-}
+// export const getUniqueKeywords = async () => {
+//   try {
+//     const tree = await getFullGalleryList();
+//     const keywords_: string[] = [];
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//     tree.forEach((item: TImage | any) => {
+//       item.children.forEach((element: TImage) => {
+//         if (element.type === 'file' && element.keywords) {
+//           if (typeof element.keywords === 'string') keywords_.push(element.keywords);
+//           if (Array.isArray(element.keywords)) keywords_.push(...element.keywords);                  
+//         }
+//       });     
+//     });
+//     const uniqueKeywords: string[] = [...new Set(keywords_)].sort();  
+//     return uniqueKeywords;
+//   } catch (err) {
+//     console.error('Failed to get unique keywords', err);
+//     return ["error"];
+//   }
+// }
 

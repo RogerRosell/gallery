@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FilterSelect } from '@/components/FilterSelect';
 import { useFAlbumStore } from '@/store';
 import ResetFilters from '@/components/SVG/ResetFilters';
-import { filterImagesByKeywords, getFilterData, filterImages } from '@/store/filterUtils';
+import { filterImagesByKeywords, getFilterData, filterImages } from '@/lib/filterUtils';
 
 type activeFilters = {
     event: string,

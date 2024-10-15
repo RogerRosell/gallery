@@ -1,54 +1,35 @@
 // import { getServerSession } from 'next-auth';
 import Filters from '@/components/Filters';
 import { Gallery } from '@/components/Gallery';
-// import { redirect } from 'next/navigation';
-import { getFilterData } from '@/actions';
-import { getUniqueKeywords, getFullGalleryList } from '@/actions/galleryList';
-import { getImagesList } from '@/actions/galleryList';
-import AppInitialiser from './utils/AppInitialiser';
-// import { getServerSession } from 'next-auth';
+import { getFullGalleryList } from '@/actions/galleryList';
+import AppInitialiser from '@/lib/AppInitialiser';
+import { getImagesList, getUniqueKeywords, getFilterData } from '@/lib/filterUtils';
 
 export default async function Home() {
-  // try {
-    // const session = await getServerSession();
-    const keywords = await getUniqueKeywords();
-    const images = await getImagesList();
-    const initTree = await getFullGalleryList();
+  const initTree = await getFullGalleryList();
+  const images = initTree && initTree.length > 0 && getImagesList(initTree);
+  const keywords = initTree && initTree.length > 0 && getUniqueKeywords(initTree);
 
-    const filterData = getFilterData(images);
- 
-  // try {    
-  //   keywords = await getUniqueKeywords();
-  //   images = await getImagesList();
-  //   initTree = await getFullGalleryList();
-  // } catch (error) { console.log("error", error); redirect("/api/auth/signin") }
-    
-    return (
-      <main className=''>
-        {/* {session?.user?.name ? ( */}
-        {keywords && keywords.length > 0 && images && images.length > 0 && initTree && (
-          <AppInitialiser 
-            initTree={initTree}
-            filterData={filterData}
-            keywords={keywords}
-            allImages={images}
-            filteredImages={images}
-          >
+  const filterData = images ? getFilterData(images) : undefined;
+
+  return (
+    <main>
+      {keywords && keywords.length > 0 && images && images.length > 0 && initTree && (
+        <AppInitialiser
+          initTree={initTree}
+          filterData={filterData}
+          keywords={keywords}
+          allImages={images}
+          filteredImages={images}
+        >
           <div>
             <div className="flex gap-4">
               <Filters />
             </div>
             <Gallery />
           </div>
-          </AppInitialiser>
-        ) }
-      </main>
-          );
-        {/* )) : (
-            <div>
-            <h1>Family Gallery</h1>
-            <p>Sign in to see the gallery</p>
-          </div>
-        ) */}    
-  // } catch (error) { console.log("error", error) }
+        </AppInitialiser>
+      )}
+    </main>
+  )
 }

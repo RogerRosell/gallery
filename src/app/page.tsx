@@ -9,7 +9,7 @@ import AppInitialiser from './utils/AppInitialiser';
 // import { getServerSession } from 'next-auth';
 
 export default async function Home() {
-  try {
+  // try {
     // const session = await getServerSession();
     const keywords = await getUniqueKeywords();
     const images = await getImagesList();
@@ -50,5 +50,5 @@ export default async function Home() {
             <p>Sign in to see the gallery</p>
           </div>
         ) */}    
-  } catch (error) { console.log("error", error) }
+  // } catch (error) { console.log("error", error) }
 }

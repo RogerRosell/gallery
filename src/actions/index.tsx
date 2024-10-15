@@ -3,8 +3,8 @@ import { join as pathJoin } from 'path';
 import { TFolder } from '@/dataModel/directory';
 import { TImage } from '@/dataModel/image';
 // import { TImage } from '@/dataModel/image';
-import { getImagesList } from './galleryList';
-import { getUniqueKeywords } from './galleryList';
+// import { getImagesList } from './galleryList';
+// import { getUniqueKeywords } from './galleryList';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const exiftool = require("exiftool-vendored").exiftool
 
@@ -195,15 +195,15 @@ export async function getFullGalleryList() {
   return galleryList;
 }
 
-export async function getInitialData() {
-    const images = getImagesList();    
-    const filterData = getFilterData();
-    try {
-      const keywords= await getUniqueKeywords();
-      return {images, filterData, keywords};
-    } catch (error) {
-      console.log("error >>", error);
-      return {};
-    }
-}
+// export async function getInitialData() {
+//     const images = getImagesList();    
+//     const filterData = getFilterData();
+//     try {
+//       const keywords= await getUniqueKeywords();
+//       return {images, filterData, keywords};
+//     } catch (error) {
+//       console.log("error >>", error);
+//       return {};
+//     }
+// }
 

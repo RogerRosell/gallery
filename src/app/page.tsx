@@ -13,6 +13,7 @@ export default async function Home() {
     const images = initTree && initTree.length > 0 && getImagesList(initTree);
     const keywords = initTree && initTree.length > 0 && getUniqueKeywords(initTree);
     const filterData = images ? getFilterData(images) : undefined;
+    console.log("initTree", initTree);
 
     return (
       <main>

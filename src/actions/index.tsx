@@ -177,16 +177,17 @@ export async function getFullGalleryList() {
   const folderList = getFoldersList('gallery-images');
   const galleryList = folderList.map((folder) => {
     const images = getImageList(folder.name);
-    const imagesWithMetaData = Promise.all(images.map(async (image) => {
+    const imagesWithMetaData: TImage[] = [];
+    Promise.all(images.map(async (image) => {
       const curPath = pathJoin(process.cwd(), `public/gallery-images/${folder.name}/${image}`);
       // const imageFilterData = 
       const imageMetadata = await getImageMetaData(curPath)
       if(!imageMetadata) return null;
 
-      const newData = {...imageMetadata, name: image}
-      
-      return newData;      
-      
+      imagesWithMetaData.push({
+        ...imageMetadata, name: image,
+        type: 'file'
+      })      
     }));
     return {
       ...folder,

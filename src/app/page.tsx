@@ -6,9 +6,8 @@ import AppInitialiser from '@/lib/AppInitialiser';
 import { getImagesList, getUniqueKeywords, getFilterData } from '@/lib/filterUtils';
 
 export default async function Home() {
-  let initTree;
   try {
-    initTree = await getFullGalleryList();
+    const initTree = await getFullGalleryList();
  
     const images = initTree && initTree.length > 0 && getImagesList(initTree);
     const keywords = initTree && initTree.length > 0 && getUniqueKeywords(initTree);

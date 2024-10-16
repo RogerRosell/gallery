@@ -1,23 +1,7 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-// import { getServerSession } from 'next-auth';
-// import SessionProvider from '@/components/SessionProvider';
-// import NavMenu from '@/components/NavMenu';
-
-
-
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { getServerSession } from 'next-auth';
+import SessionProvider from '@/components/SessionProvider';
 
 export const metadata: Metadata = {
   title: "Family Gallery",
@@ -30,24 +14,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  // const session = await getServerSession();
-  // const filterData = getFilterData();
-  //   const keywords = await getUniqueKeywords();
-  //   const images = await getImagesList();
-    // const initTree = await getFullGalleryList();
+  const session = await getServerSession();
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* <SessionProvider session={session}> */}
+      <body className="font-sans">
+        <SessionProvider session={session}>
           <main className="p-32">
             {/* <NavMenu /> */}
-            
             {children}
-            {/* </AppInitialiser> */}
           </main>          
-          {/* </SessionProvider> */}
+          </SessionProvider>
       </body>
     </html>
   );

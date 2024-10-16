@@ -21,7 +21,9 @@ const Filters = () => {
   const setFilterData = useFAlbumStore(state => state.setFilterData);
   const setFilteredImages = useFAlbumStore(state => state.setFilteredImages);
   const resetFilteredImages = useFAlbumStore(state => state.resetFilteredImages);
-  // filterData && console.log("filterData", filterData);
+  console.log("filterData", filterData);
+  console.log("allImages", allImages);
+
 
   const [activeFilters, setActiveFilters] = useState<activeFilters>({
     event: "",

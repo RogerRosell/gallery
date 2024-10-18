@@ -50,24 +50,9 @@ export const getImageMetaData = async (imagePath: string): Promise<any> => {
       const imageData = { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
       return imageData;
     })
-    // .end()
+    .end()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .catch((err:any) => console.error("Something terrible happened: ", err))
-
-  // console.log("imagePath from getImageMetaData >>", imagePath)
-  // // exiftool
-  // //   .version()
-  // //   .then((version:string) => console.log(`We're running ExifTool v${version}`))
-
-  // const tags = await exiftool.read(imagePath);
-  // console.log("tags >>", tags)
-  // if (!tags) {
-  //   return null;
-  // }
-
-  // const imageData = tags && { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
-
-  // return imageData;
 }
 
 // async function extractKeywords() {

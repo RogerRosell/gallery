@@ -48,6 +48,18 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
 export async function getFullGalleryList() {
   const galleryImagesDir = path.join(process.cwd(), 'public', 'gallery-images');
   console.log("galleryImagesDir >> ", galleryImagesDir);
+  const currentDirectory = path.join(process.cwd());
+  fs.readdir(currentDirectory, function (err, files) {
+    //handling error
+    if (err) {
+        return console.log('Unable to scan directory: ' + err);
+    } 
+    //listing all files using forEach
+    files.forEach(function (file) {
+        // Do whatever you want to do with the file
+        console.log(file); 
+    });
+});
   // process.chdir('../')
   // console.log(path.join(process.cwd(), 'gallery-images'))
   // console.log("galleryImagesDir >> ", galleryImagesDir);

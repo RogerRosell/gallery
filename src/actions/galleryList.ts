@@ -12,12 +12,14 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
   for (const item of items) {
     // console.log("item from readDirectoryWithMetadata >> ", item);
     const fullPath = path.join(dirPath, item);
-    // console.log("fullPath from readDirectoryWithMetadata >> ", fullPath);
+    console.log("fullPath from readDirectoryWithMetadata >> ", fullPath);
     const isDirectory = fs.statSync(fullPath).isDirectory();
 
     if (isDirectory) {
+      console.log("isDirectory from readDirectoryWithMetadata >> ", isDirectory);
       
       const folderData = item && getFolderData(item);
+      console.log("folderData from readDirectoryWithMetadata >> ", folderData);
       if (typeof folderData === 'object' && folderData !== null) {
         result.push({
           name: item,
@@ -37,6 +39,7 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
         console.log("result from readDirectoryWithMetadata >> ", result);
       }
     } else if (/\.(jpg|jpeg|png|gif)$/.test(item)) {
+      console.log("image from readDirectoryWithMetadata >> ", item);
       const metadata = await getImageMetaData(fullPath);
       
       result.push({

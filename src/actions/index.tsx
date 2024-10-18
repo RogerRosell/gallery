@@ -42,8 +42,8 @@ export function getFilterData(images: TImage[] = []) {
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getImageMetaData = async (imagePath: string): Promise<any> => {
-  const exiftool = new ExifTool({ taskTimeoutMillis: 5000 })
-  exiftool
+  // const exiftool = new ExifTool({ taskTimeoutMillis: 5000 })
+  ExifTool
     .read(imagePath)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .then((tags:any) => {

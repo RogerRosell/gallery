@@ -6,7 +6,6 @@ import { TImage } from '@/dataModel/image';
 // import { getImagesList } from './galleryList';
 // import { getUniqueKeywords } from './galleryList';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const exiftool = require("exiftool-vendored").exiftool
 
 export function getFolderData(item: string) {
   const folderDataRaw = item.split('-');
@@ -41,6 +40,8 @@ export function getFilterData(images: TImage[] = []) {
 }
 
 export const getImageMetaData = async (imagePath: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const exiftool = require("exiftool-vendored").exiftool
   console.log("imagePath from getImageMetaData >>", imagePath)
   exiftool
     .version()

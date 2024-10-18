@@ -40,27 +40,34 @@ export function getFilterData(images: TImage[] = []) {
 
   return { titles, places, months, years };
 }
-
-export const getImageMetaData = async (imagePath: string) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getImageMetaData = async (imagePath: string): Promise<any> => {
   const exiftool = new ExifTool({ taskTimeoutMillis: 5000 })
   exiftool
-    .version()
-    .then((version: string) => console.log(`We're running ExifTool v${version}`))
+    .read(imagePath)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .then((tags:any) => {
+      const imageData = { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
+      return imageData;
+    })
+    .end()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .catch((err:any) => console.error("Something terrible happened: ", err))
 
-  console.log("imagePath from getImageMetaData >>", imagePath)
-  // exiftool
-  //   .version()
-  //   .then((version:string) => console.log(`We're running ExifTool v${version}`))
+  // console.log("imagePath from getImageMetaData >>", imagePath)
+  // // exiftool
+  // //   .version()
+  // //   .then((version:string) => console.log(`We're running ExifTool v${version}`))
 
-  const tags = await exiftool.read(imagePath);
-  console.log("tags >>", tags)
-  if (!tags) {
-    return null;
-  }
+  // const tags = await exiftool.read(imagePath);
+  // console.log("tags >>", tags)
+  // if (!tags) {
+  //   return null;
+  // }
 
-  const imageData = tags && { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
+  // const imageData = tags && { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
 
-  return imageData;
+  // return imageData;
 }
 
 // async function extractKeywords() {
@@ -196,7 +203,7 @@ export async function getFullGalleryList() {
       const curPath = pathJoin(process.cwd(), `public/gallery-images/${folder.name}/${image}`);
       // const imageFilterData = 
       const imageMetadata = await getImageMetaData(curPath)
-      if (!imageMetadata) return null;
+      if (!imageMetadata) return;
 
       imagesWithMetaData.push({
         ...imageMetadata, name: image,

@@ -7,7 +7,7 @@ import { TImage } from '@/dataModel/image';
 // import { getImagesList } from './galleryList';
 // import { getUniqueKeywords } from './galleryList';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const exiftool = require("exiftool-vendored").exiftool
+const ExifTool = require("exiftool-vendored").ExifTool
 
 export function getFolderData(item: string) {
   const folderDataRaw = item.split('-');
@@ -42,10 +42,11 @@ export function getFilterData(images: TImage[] = []) {
 }
 
 export const getImageMetaData = async (imagePath: string) => {
+  const exiftool = new ExifTool({ taskTimeoutMillis: 5000 })
   exiftool
-  .version()
-  .then((version) => console.log(`We're running ExifTool v${version}`))
-  
+    .version()
+    .then((version: string) => console.log(`We're running ExifTool v${version}`))
+
   console.log("imagePath from getImageMetaData >>", imagePath)
   // exiftool
   //   .version()
@@ -57,8 +58,8 @@ export const getImageMetaData = async (imagePath: string) => {
     return null;
   }
 
-  const imageData = tags && {width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords}
-  
+  const imageData = tags && { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
+
   return imageData;
 }
 
@@ -80,7 +81,7 @@ export const getImageMetaData = async (imagePath: string) => {
 //   // } catch (err) {
 //   //   console.log("Error >>", err)
 //   // }
-  
+
 
 //   // console.log("keywords_ >>", keywords_)
 //   // return keywords;
@@ -94,7 +95,7 @@ export const getImageMetaData = async (imagePath: string) => {
 //   const keywords = await extractKeywords(folderList[0].name);
 //   // console.log("keywords >>", keywords)
 //   // const allImagesList = folderList.map((folder) => getImageList(folder.name));
-  
+
 //   // console.log("allImagesList >>", allImagesList)
 
 //   // console.log("folderList >>", folderList)
@@ -151,10 +152,10 @@ export const getImageMetaData = async (imagePath: string) => {
 //   //       // return (...imageMetadata.keywords);
 //   //       // const newKeywords = [...keywords, ...imageMetadata.keywords];    
 //   //       // console.log("newKeywords >>", ...imageMetadata.keywords) 
-      
+
 //   //   });
 //     // console.log("allKeywords >>", allKeywords);
-    
+
 //     // console.log("keywords_ >>", keywords_)
 //     return keywords;
 // }
@@ -176,7 +177,7 @@ export function getFoldersList(dirName: string): TFolder[] {
 }
 
 export function getImageList(dirName: string): string[] {
-  
+
   const filepath = pathJoin(process.cwd(), `public/gallery-images/${dirName}`);
   if (fs.existsSync(filepath)) {
     const images = fs.readdirSync(filepath).filter(image => !image.startsWith('.'));
@@ -195,12 +196,12 @@ export async function getFullGalleryList() {
       const curPath = pathJoin(process.cwd(), `public/gallery-images/${folder.name}/${image}`);
       // const imageFilterData = 
       const imageMetadata = await getImageMetaData(curPath)
-      if(!imageMetadata) return null;
+      if (!imageMetadata) return null;
 
       imagesWithMetaData.push({
         ...imageMetadata, name: image,
         type: 'file'
-      })      
+      })
     }));
     return {
       ...folder,

@@ -49,10 +49,10 @@ export const getImageMetaData = async (imagePath: string): Promise<any> => {
     .then((tags:any) => {
       const imageData = { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
       return imageData;
-    })
-    .end()
+    })    
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .catch((err:any) => console.error("Something terrible happened: ", err))
+    .end()
 }
 
 // async function extractKeywords() {

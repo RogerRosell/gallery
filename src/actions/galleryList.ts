@@ -10,8 +10,9 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
   // console.log("items from readDirectoryWithMetadata >> ", items);
 
   for (const item of items) {
+    console.log("item from readDirectoryWithMetadata >> ", item);
     const fullPath = path.join(dirPath, item);
-    console.log("fullPath from readDirectoryWithMetadata >> ", fullPath);
+    // console.log("fullPath from readDirectoryWithMetadata >> ", fullPath);
     const isDirectory = fs.statSync(fullPath).isDirectory();
 
     if (isDirectory) {

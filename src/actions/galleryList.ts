@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { TFolder } from '@/dataModel/directory';
 import { TImage } from '@/dataModel/image';
-import { getImageMetaData, getFolderData } from '@/actions/';
+import { getFolderData } from '@/actions/';
 
 async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFolder)[]> {
   const items = fs.readdirSync(dirPath);
@@ -12,14 +12,14 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
   for (const item of items) {
     // console.log("item from readDirectoryWithMetadata >> ", item);
     const fullPath = path.join(dirPath, item);
-    console.log("fullPath from readDirectoryWithMetadata >> ", fullPath);
+    // console.log("fullPath from readDirectoryWithMetadata >> ", fullPath);
     const isDirectory = fs.statSync(fullPath).isDirectory();
 
     if (isDirectory) {
-      console.log("isDirectory from readDirectoryWithMetadata >> ", isDirectory);
+      // console.log("isDirectory from readDirectoryWithMetadata >> ", isDirectory);
       
       const folderData = item && getFolderData(item);
-      console.log("folderData from readDirectoryWithMetadata >> ", folderData);
+      // console.log("folderData from readDirectoryWithMetadata >> ", folderData);
       if (typeof folderData === 'object' && folderData !== null) {
         result.push({
           name: item,
@@ -29,23 +29,23 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
           place: folderData.place,
           date: folderData.date
         });
-        console.log("result from readDirectoryWithMetadata >> ", result);
+        // console.log("result from readDirectoryWithMetadata >> ", result);
       } else {
         result.push({
           name: item,
           type: 'directory',
           children: await readDirectoryWithMetadata(fullPath)          
         });
-        console.log("result from readDirectoryWithMetadata >> ", result);
+        // console.log("result from readDirectoryWithMetadata >> ", result);
       }
     } else if (/\.(jpg|jpeg|png|gif)$/.test(item)) {
-      console.log("image from readDirectoryWithMetadata >> ", item);
-      const metadata = await getImageMetaData(fullPath);
+      // console.log("image from readDirectoryWithMetadata >> ", item);
+      // const metadata = await getImageMetaData(fullPath);
       
       result.push({
         name: item,
         type: 'file',
-        ...metadata
+        // ...metadata
       });
     }
   }

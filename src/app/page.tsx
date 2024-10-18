@@ -3,7 +3,7 @@ import Filters from '@/components/Filters';
 import { Gallery } from '@/components/Gallery';
 import { getFullGalleryList } from '@/actions/galleryList';
 import AppInitialiser from '@/lib/AppInitialiser';
-import { getImagesList, getUniqueKeywords, getFilterData } from '@/lib/filterUtils';
+import { getImagesList, getFilterData } from '@/lib/filterUtils';
 
 export default async function Home() {
   try {
@@ -11,21 +11,22 @@ export default async function Home() {
     console.log("initTree >> ", initTree);
  
     const images = initTree && initTree.length > 0 && getImagesList(initTree);
-    const keywords = initTree && initTree.length > 0 && getUniqueKeywords(initTree);
+    // const keywords = initTree && initTree.length > 0 && getUniqueKeywords(initTree);
     const filterData = images ? getFilterData(images) : undefined;
 
-    console.log("images >> ", images);
-    console.log("keywords >> ", keywords);
-    console.log("filterData >> ", filterData);
+    // console.log("images >> ", images);
+    // console.log("keywords >> ", keywords);
+    // console.log("filterData >> ", filterData);
 
     return (
       <main>
         here comes the fun
-        {keywords && keywords.length > 0 && images && images.length > 0 && initTree && filterData && (
+        {/* {keywords && keywords.length > 0 && images && images.length > 0 && initTree && filterData && ( */}
+        {images && images.length > 0 && initTree && filterData && (
           <AppInitialiser
             initTree={initTree}
             filterData={filterData}
-            keywords={keywords}
+            // keywords={keywords}
             allImages={images}
             filteredImages={images}
           >

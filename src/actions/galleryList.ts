@@ -7,10 +7,11 @@ import { getImageMetaData, getFolderData } from '@/actions/';
 async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFolder)[]> {
   const items = fs.readdirSync(dirPath);
   const result: (TImage | TFolder)[] = [];
-  console.log("items from readDirectoryWithMetadata >> ", items);
+  // console.log("items from readDirectoryWithMetadata >> ", items);
 
   for (const item of items) {
     const fullPath = path.join(dirPath, item);
+    console.log("fullPath from readDirectoryWithMetadata >> ", fullPath);
     const isDirectory = fs.statSync(fullPath).isDirectory();
 
     if (isDirectory) {

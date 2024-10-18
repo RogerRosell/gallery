@@ -52,7 +52,9 @@ export const getImageMetaData = async (imagePath: string): Promise<TImageMetadat
     return imageData;
   })
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  .catch((err:any) => console.error("Something terrible happened: ", err))  
+  .catch((err:any) => console.error("Something terrible happened: ", err));
+
+  exiftool.end();
 
   return ({width: 0, height: 0, keywords: []})
 }

@@ -48,7 +48,7 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
 export async function getFullGalleryList() {
   const galleryImagesDir = path.join(process.cwd(), 'public', 'gallery-images');
   console.log("galleryImagesDir >> ", galleryImagesDir);
-  const currentDirectory = path.join(process.cwd());
+  const currentDirectory = path.join(process.cwd(),'public', 'gallery-images');
   fs.readdir(currentDirectory, function (err, files) {
     //handling error
     if (err) {

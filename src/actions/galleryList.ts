@@ -46,10 +46,10 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
 }
 
 export async function getFullGalleryList() {
-  const galleryImagesDir = path.join(process.cwd(), 'gallery-images');
+  const galleryImagesDir = path.join(process.cwd(), 'public', 'gallery-images');
   console.log("galleryImagesDir >> ", galleryImagesDir);
-  process.chdir('../gallery-images')
-  console.log(process.cwd())
+  // process.chdir('../')
+  // console.log(path.join(process.cwd(), 'gallery-images'))
   // console.log("galleryImagesDir >> ", galleryImagesDir);
   try {
     const tree = await readDirectoryWithMetadata(galleryImagesDir);

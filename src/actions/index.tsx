@@ -42,6 +42,10 @@ export function getFilterData(images: TImage[] = []) {
 
 export const getImageMetaData = async (imagePath: string) => {
   console.log("imagePath from getImageMetaData >>", imagePath)
+  exiftool
+    .version()
+    .then((version:string) => console.log(`We're running ExifTool v${version}`))
+
   const tags = await exiftool.read(imagePath);
   console.log("tags >>", tags)
   if (!tags) {

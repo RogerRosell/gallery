@@ -7,6 +7,7 @@ import { getImageMetaData, getFolderData } from '@/actions/';
 async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFolder)[]> {
   const items = fs.readdirSync(dirPath);
   const result: (TImage | TFolder)[] = [];
+  console.log("items from readDirectoryWithMetadata >> ", items);
 
   for (const item of items) {
     const fullPath = path.join(dirPath, item);
@@ -46,8 +47,8 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
 }
 
 export async function getFullGalleryList() {
-  const galleryImagesDir = path.join(process.cwd(), 'app', 'public', 'gallery-images');
-  console.log("galleryImagesDir >> ", galleryImagesDir);
+  const galleryImagesDir = path.join(process.cwd(), 'public', 'gallery-images');
+  // console.log("galleryImagesDir >> ", galleryImagesDir);
 //   const currentDirectory = path.join(process.cwd(),'public', 'gallery-images');
 //   fs.readdir(currentDirectory, function (err, files) {
 //     //handling error

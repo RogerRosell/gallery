@@ -48,6 +48,7 @@ export const getImageMetaData = async (imagePath: string): Promise<TImageMetadat
   .read(imagePath)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   .then((tags:any) => {
+    console.log("tags.Keywords >>", tags.Keywords)
     const imageData = { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
     return imageData;
   })
@@ -57,8 +58,8 @@ export const getImageMetaData = async (imagePath: string): Promise<TImageMetadat
   exiftool
     .end();
 
-    console.log("imageData >>", imageData);
-    
+    // console.log("imageData >>", imageData);
+
     return imageData || {width: 0, height: 0, keywords: []};
 }
 

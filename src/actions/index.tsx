@@ -40,19 +40,24 @@ export function getFilterData(images: TImage[] = []) {
 
   return { titles, places, months, years };
 }
+type TImageMetadata = {width: number, height: number, keywords: string[]}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getImageMetaData = async (imagePath: string): Promise<any> => {
-  const exiftool = new ExifTool({ taskTimeoutMillis: 5000 })
-  exiftool
-    .read(imagePath)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .then((tags:any) => {
-      const imageData = { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
-      return imageData;
-    })    
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .catch((err:any) => console.error("Something terrible happened: ", err))
-    .end()
+export const getImageMetaData = async (imagePath: string): Promise<TImageMetadata> => {
+  const exiftool = new ExifTool({ taskTimeoutMillis: 5000 });
+  try {
+    const tags = await exiftool.read(imagePath);
+    const imageData: TImageMetadata = { 
+      width: tags.ImageWidth, 
+      height: tags.ImageHeight, 
+      keywords: tags.Keywords 
+    };
+    await exiftool.end();
+    return imageData;
+  } catch (err) {
+    console.error("Something terrible happened: ", err);
+    await exiftool.end();
+    throw err;
+  }
 }
 
 // async function extractKeywords() {
@@ -183,15 +188,17 @@ export async function getFullGalleryList() {
   const folderList = getFoldersList('gallery-images');
   const galleryList = folderList.map((folder) => {
     const images = getImageList(folder.name);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const imagesWithMetaData: TImage[] = [];
     Promise.all(images.map(async (image) => {
       const curPath = pathJoin(process.cwd(), `public/gallery-images/${folder.name}/${image}`);
       // const imageFilterData = 
-      const imageMetadata = await getImageMetaData(curPath)
+      const imageMetadata: TImageMetadata = await getImageMetaData(curPath)
       if (!imageMetadata) return;
 
       imagesWithMetaData.push({
-        ...imageMetadata, name: image,
+        ...imageMetadata, 
+        name: image,
         type: 'file'
       })
     }));

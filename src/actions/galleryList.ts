@@ -46,7 +46,8 @@ async function readDirectoryWithMetadata(dirPath: string): Promise<(TImage | TFo
 }
 
 export async function getFullGalleryList() {
-  const galleryImagesDir = path.join(process.cwd(), 'public', 'gallery-images');
+  const galleryImagesDir = path.join(process.cwd(), 'gallery-images');
+  console.log("galleryImagesDir >> ", galleryImagesDir);
   try {
     const tree = await readDirectoryWithMetadata(galleryImagesDir);
     return tree;

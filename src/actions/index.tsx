@@ -44,7 +44,7 @@ type TImageMetadata = {width: number, height: number, keywords: string[]}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getImageMetaData = async (imagePath: string): Promise<TImageMetadata> => {
   const exiftool = new ExifTool({ taskTimeoutMillis: 5000 });
-  exiftool
+  const imageData = exiftool
   .read(imagePath)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   .then((tags:any) => {
@@ -54,9 +54,12 @@ export const getImageMetaData = async (imagePath: string): Promise<TImageMetadat
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   .catch((err:any) => console.error("Something terrible happened: ", err));
 
-  exiftool.end();
+  exiftool
+    .end();
 
-  return ({width: 0, height: 0, keywords: []})
+    console.log("imageData >>", imageData);
+    
+    return imageData || {width: 0, height: 0, keywords: []};
 }
 
 // async function extractKeywords() {

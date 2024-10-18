@@ -43,16 +43,18 @@ export const getImageMetaData = async (imagePath: string) => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const exiftool = require("exiftool-vendored").exiftool
   console.log("imagePath from getImageMetaData >>", imagePath)
-  exiftool
-    .version()
-    .then((version:string) => console.log(`We're running ExifTool v${version}`))
+  // exiftool
+  //   .version()
+  //   .then((version:string) => console.log(`We're running ExifTool v${version}`))
 
   const tags = await exiftool.read(imagePath);
   console.log("tags >>", tags)
   if (!tags) {
     return null;
   }
-  const imageData = {width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords}
+
+  const imageData = tags && {width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords}
+  
   return imageData;
 }
 

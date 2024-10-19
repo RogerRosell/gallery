@@ -18,11 +18,13 @@ async function readDirectoryWithMetadata(
     const isDirectory = fs.statSync(fullPath).isDirectory();
 
     if (isDirectory) {
+      
       const folderData = item && getFolderData(item, 'directory');
+      // console.log("folderData", folderData);
       if (typeof folderData === 'object' && folderData !== null) {
         result.push({
-          children: await readDirectoryWithMetadata(fullPath),
           ...folderData,
+          children: await readDirectoryWithMetadata(fullPath),          
         });
       } else {
         result.push({

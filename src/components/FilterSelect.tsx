@@ -9,7 +9,7 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function FilterSelect({ id, values, onChangeHandler }: any) {
   return (
-    <Select data-id={id} onValueChange={(value) => onChangeHandler(id, value)}>
+    <Select data-id={id} defaultValue={id} onValueChange={(value) => onChangeHandler(id, value)}>
     <SelectTrigger className="w-[180px]">
       <SelectValue placeholder={id.charAt(0).toUpperCase() + id.slice(1)} />
     </SelectTrigger>
@@ -20,7 +20,6 @@ export function FilterSelect({ id, values, onChangeHandler }: any) {
         </SelectItem>
       ))}
     </SelectContent>
-  </Select>
-  
+  </Select>  
   )
 }

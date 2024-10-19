@@ -4,6 +4,8 @@ import { FilterSelect } from '@/components/FilterSelect';
 import { useFAlbumStore } from '@/store';
 import ResetFilters from '@/components/SVG/ResetFilters';
 import { filterImagesByKeywords, getFilterData, filterImages } from '@/lib/filterUtils';
+import { KeywordsList } from '@/components/KeywordsList';
+
 
 type activeFilters = {
     event: string,
@@ -21,9 +23,6 @@ const Filters = () => {
   const setFilterData = useFAlbumStore(state => state.setFilterData);
   const setFilteredImages = useFAlbumStore(state => state.setFilteredImages);
   const resetFilteredImages = useFAlbumStore(state => state.resetFilteredImages);
-  console.log("filterData", filterData);
-  console.log("allImages", allImages);
-
 
   const [activeFilters, setActiveFilters] = useState<activeFilters>({
     event: "",
@@ -32,6 +31,7 @@ const Filters = () => {
     keywords: []
   });
   
+  console.log("active keywords", activeFilters.keywords);
   const onChangeHandler = (id: string, value: string) => {      
     if (id ==="keywords") {
       const updatedKeywords = activeFilters.keywords.includes(value) ? activeFilters.keywords.filter(keyword => keyword !== value) : [...activeFilters.keywords, value];
@@ -51,6 +51,13 @@ const Filters = () => {
     }
 }
 
+const removeKeyword = (keyword: string) => {
+  const updatedKeywords = activeFilters.keywords.filter(k => k !== keyword);
+  setActiveFilters({...activeFilters, keywords: updatedKeywords});
+  setFilteredImages(filterImagesByKeywords(filteredImages, updatedKeywords));
+  setFilterData(getFilterData(filterImagesByKeywords(filteredImages, updatedKeywords)));
+}
+
 const resetFilters = () => {
   setActiveFilters({
   event: "",
@@ -58,26 +65,25 @@ const resetFilters = () => {
     any: "",
     keywords: []
 });
-// setFilterData({
-//   event: "",
-//     lloc: "",
-//     any: "",
-//     keywords: []
-// })
 resetFilteredImages();
 // const newFilterData = getFilterData(allImages);
 setFilterData(getFilterData(allImages));
 
 return true;
 }
-  // console.log("activeFilters", activeFilters);
 
   return (
     <>
     {filterData.titles && <FilterSelect id={"event"} values={filterData.titles.filter((title:string): title is string => title !== undefined)} onChangeHandler={onChangeHandler} />}
     {filterData.places && <FilterSelect id={"lloc"} values={filterData.places.filter((place:string): place is string => place !== undefined)} onChangeHandler={onChangeHandler} />}
     {filterData.years && <FilterSelect id={"any"} values={filterData.years.filter((year:string): year is string => year !== undefined)} onChangeHandler={onChangeHandler} />}  
-    {keywords && keywords?.length > 0 && <FilterSelect id={"keywords"} values={keywords.filter((keyword:string): keyword is string => keyword!== undefined)} onChangeHandler={onChangeHandler} />}
+    {keywords && keywords?.length > 0 && 
+    <div>
+      <FilterSelect id={"keywords"} values={keywords.filter((keyword:string): keyword is string => keyword!== undefined)} onChangeHandler={onChangeHandler} />
+        {activeFilters.keywords.length > 0 && 
+        <KeywordsList keywords={[...activeFilters.keywords]} removeKeyword={removeKeyword} />
+        }
+    </div>}      
     <button onClick={()=> resetFilters()}><ResetFilters /></button>    
     </>
   )

@@ -17,7 +17,6 @@ const authOptions = {
       },
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       async authorize(credentials, req) {
-        // console.log("req", req);
         const user = (credentials?.username === username && credentials?.password === password) 
         ?
         { id: "1", name: "AuthOk!" }

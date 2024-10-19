@@ -51,7 +51,8 @@ const getImageMetadata = async (imagePath: string) => {
   const metadata = await sharp(imagePath).metadata();
   const width = metadata.width;
   const height = metadata.height;
-  const keywords = iptc(metadata.iptc).keywords;
+  // console.log("metadata", metadata.iptc);
+  const keywords = metadata.iptc ? iptc(metadata.iptc).keywords : [];
   return { width, height, keywords };
 };
 

@@ -7,6 +7,13 @@
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
+"@atombrenner/exif-reader-jpeg@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@atombrenner/exif-reader-jpeg/-/exif-reader-jpeg-2.0.0.tgz#3878ee5cad0c2e3f6925bdaac4dc4c693b031d5e"
+  integrity sha512-ChmbfGTkPmH+BKmnEZ/gVzSqLdpzVPGc3bOur1EPF9u+zB0bvCe0jx0dFZC8Q332fm3KFZ1uSHlbLXxXliXthA==
+  dependencies:
+    exif-reader "2.0.0"
+
 "@babel/runtime@^7.13.10", "@babel/runtime@^7.20.13":
   version "7.25.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.25.7.tgz#7ffb53c37a8f247c8c4d335e89cdf16a2e0d0fb6"
@@ -1772,6 +1779,11 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
+exif-reader@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/exif-reader/-/exif-reader-2.0.0.tgz#35da9d0ceaf28a409b821e6878edbce363d40ce9"
+  integrity sha512-/c4JW2Kb4/MdmUJyMKTXhNG524q0pCA1DDCEb2aawd9j2i2+bc+mKGKKyO4z2glRTKW93Ks4BWCgmKeEyKiUeA==
+
 exif-reader@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/exif-reader/-/exif-reader-2.0.1.tgz#8e4994d5758d1925fab1c73379525effd494dcc4"
@@ -2125,6 +2137,11 @@ invariant@^2.2.4:
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
   dependencies:
     loose-envify "^1.0.0"
+
+iptc-reader@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/iptc-reader/-/iptc-reader-1.0.1.tgz#ae070c143b908f0457120fbfc058704d463c431e"
+  integrity sha512-Z1m64CM33EOHSoS2+mlBtqRNCY8dJFgcoW+qLWYCokEAdpKuA7vYueMdSAxti02AFeH8dhe07iJsYGDrVr8u4g==
 
 is-arguments@^1.1.1:
   version "1.1.1"
@@ -3411,6 +3428,11 @@ ts-interface-checker@^0.1.9:
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
+
+ts-node-iptc@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/ts-node-iptc/-/ts-node-iptc-1.0.11.tgz#69f85c7f74a2a9ad910b7c2b6367dd2dbc769271"
+  integrity sha512-6f10Fae8EjQwEOY4OuIDEiRVZfwVnnWq9ipb7B7UB71diTEz4lgH8R5vAvRt4B9G15K3/Q/8XdA0OX4vC27Fxg==
 
 tsconfig-paths@^3.15.0:
   version "3.15.0"

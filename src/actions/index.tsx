@@ -7,9 +7,10 @@ import { TImage } from '@/dataModel/image';
 // import { getImagesList } from './galleryList';
 // import { getUniqueKeywords } from './galleryList';
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const ExifTool = require("exiftool-vendored").ExifTool
+// const ExifTool = require("exiftool-vendored").ExifToolimport { type } from '../store/index';
 
-export function getFolderData(item: string) {
+
+export function getFolderData(item: string, type: string = 'directory'): TFolder {
   const folderDataRaw = item.split('-');
   const title = folderDataRaw[0] || "";
   const place = folderDataRaw[1] || "";
@@ -18,8 +19,8 @@ export function getFolderData(item: string) {
   const year = date && date.split('_')[1] || "";
 
   const folderData: TFolder = {
+    type: type,
     name: item,
-    type: 'directory',
     title: title,
     place: place,
     date: {
@@ -40,28 +41,28 @@ export function getFilterData(images: TImage[] = []) {
 
   return { titles, places, months, years };
 }
-type TImageMetadata = {width: number, height: number, keywords: string[]}
+// type TImageMetadata = {width: number, height: number, keywords: string[]}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getImageMetaData = async (imagePath: string): Promise<TImageMetadata> => {
-  const exiftool = new ExifTool({ taskTimeoutMillis: 5000 });
-  const imageData = exiftool
-  .read(imagePath)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  .then((tags:any) => {
-    console.log("tags.Keywords >>", tags.Keywords)
-    const imageData = { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
-    return imageData;
-  })
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  .catch((err:any) => console.error("Something terrible happened: ", err));
+// export const getImageMetaData = async (imagePath: string): Promise<TImageMetadata> => {
+//   // const exiftool = new ExifTool({ taskTimeoutMillis: 5000 });
+//   const imageData = exiftool
+//   .read(imagePath)
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   .then((tags:any) => {
+//     console.log("tags.Keywords >>", tags.Keywords)
+//     const imageData = { width: tags.ImageWidth, height: tags.ImageHeight, keywords: tags.Keywords }
+//     return imageData;
+//   })
+//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   .catch((err:any) => console.error("Something terrible happened: ", err));
 
-  exiftool
-    .end();
+//   exiftool
+//     .end();
 
-    // console.log("imageData >>", imageData);
+//     // console.log("imageData >>", imageData);
 
-    return imageData || {width: 0, height: 0, keywords: []};
-}
+//     return imageData || {width: 0, height: 0, keywords: []};
+// }
 
 export function getFoldersList(dirName: string): TFolder[] {
   const filepath = pathJoin(process.cwd(), `public/${dirName}`);

@@ -34,14 +34,13 @@ export const getImagesList = (tree:any) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tree.forEach((item: TImage | any) => {
     item.children.forEach((element: TImage) => {
-      if (element.type === 'file') {
-        const imageFilterData = element.name && getImageFilterData(element.name);
-        const image = Object.assign({}, element, imageFilterData);
-        images.push(image);                 
+      
+      if (element.type && element.type === 'image' || element.type === 'file') {
+        images.push(element);                 
       }
     });     
   });
-  
+  // console.log("images", images);
   return images;
 };
 
@@ -50,12 +49,10 @@ export const getUniqueKeywords = (tree:any) => {
     const keywords_: string[] = [];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
     tree.forEach((item: TImage | any) => {
-      item.children.forEach((element: TImage) => {
-        if (element.type === 'file' && element.keywords) {
-          if (typeof element.keywords === 'string') keywords_.push(element.keywords);
-          if (Array.isArray(element.keywords)) keywords_.push(...element.keywords);                  
-        }
-      });     
+      if (item.type === 'image' && item.keywords) {
+        if (typeof item.keywords === 'string') keywords_.push(item.keywords);
+        if (Array.isArray(item.keywords)) keywords_.push(...item.keywords);                  
+      } 
     });
     const uniqueKeywords: string[] = [...new Set(keywords_)].sort();  
     return uniqueKeywords;

@@ -5,7 +5,7 @@ import Filters from '@/components/Filters';
 import { Gallery } from '@/components/Gallery';
 import { getFullGalleryList } from '@/actions/galleryList';
 import AppInitialiser from '@/lib/AppInitialiser';
-import { getImagesList, getFilterData } from '@/lib/filterUtils';
+import { getImagesList, getFilterData, getUniqueKeywords } from '@/lib/filterUtils';
 
 export default async function Home() {
   try {
@@ -13,17 +13,23 @@ export default async function Home() {
     const initTree = await getFullGalleryList();
  
     const images = initTree && initTree.length > 0 && getImagesList(initTree);
+    // console.log("images", images);
     const filterData = images ? getFilterData(images) : undefined;
+    const keywords = images ? getUniqueKeywords(images) : undefined;
+
+    // console.log("images", images);
+    // console.log("filterData", filterData);
+    // console.log("keywords", keywords);
 
     return (
       <main>
         {session && session.user ? (
             <>
-            {images && images.length > 0 && initTree && filterData && (
+            {images && images.length > 0 && initTree && filterData && keywords && keywords.length > 0 && (
           <AppInitialiser
             initTree={initTree}
             filterData={filterData}
-            // keywords={keywords}
+            keywords={keywords}
             allImages={images}
             filteredImages={images}
           >
@@ -38,10 +44,7 @@ export default async function Home() {
             </>
         ): (
           <p>Unauthorized</p>
-        )}
-        
-        {/* {keywords && keywords.length > 0 && images && images.length > 0 && initTree && filterData && ( */}
-        
+        )}        
       </main>
     )
   } catch (error) {

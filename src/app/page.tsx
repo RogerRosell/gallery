@@ -13,13 +13,9 @@ export default async function Home() {
     const initTree = await getFullGalleryList();
  
     const images = initTree && initTree.length > 0 && getImagesList(initTree);
-    // console.log("images", images);
     const filterData = images ? getFilterData(images) : undefined;
     const keywords = images ? getUniqueKeywords(images) : undefined;
 
-    // console.log("images", images);
-    // console.log("filterData", filterData);
-    // console.log("keywords", keywords);
 
     return (
       <main>

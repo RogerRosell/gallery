@@ -20,8 +20,8 @@ export default async function RootLayout({
     <html lang="en">
       <body className="font-sans">
         <SessionProvider session={session}>
-          <main className="p-32">
-            <NavMenu />
+          <main className="px-32 py-4">
+            <div className='mb-12'><NavMenu /></div>
             {children}
           </main>          
           </SessionProvider>

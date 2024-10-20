@@ -1,5 +1,4 @@
 import { getServerSession } from 'next-auth';
-
 import Filters from '@/components/Filters';
 import { Gallery } from '@/components/Gallery';
 import { getFullGalleryList } from '@/actions/galleryList';

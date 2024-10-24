@@ -31,6 +31,7 @@ const Filters = () => {
     keywords: []
   });
   
+  console.log("active keywords", activeFilters.keywords);
   const onChangeHandler = (id: string, value: string) => {      
     if (id ==="keywords") {
       const updatedKeywords = activeFilters.keywords.includes(value) ? activeFilters.keywords.filter(keyword => keyword !== value) : [...activeFilters.keywords, value];

@@ -3,7 +3,7 @@ import "./globals.css";
 import { getServerSession } from 'next-auth';
 import SessionProvider from '@/components/SessionProvider';
 import NavMenu from '@/components/NavMenu';
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+// import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 
 export const metadata: Metadata = {
@@ -22,14 +22,14 @@ export default async function RootLayout({
     <html lang="en">
       <body className="font-sans">
         <SessionProvider session={session}>
-        <SidebarProvider>
+        {/* <SidebarProvider> */}
         <AppSidebar />
           <main className="px-32 py-4">          
             <div className='mb-12'><NavMenu /></div>
-            <SidebarTrigger />
+            {/* <SidebarTrigger /> */}
             {children}
           </main>        
-          </SidebarProvider>  
+          {/* </SidebarProvider>   */}
           </SessionProvider>
       </body>
     </html>

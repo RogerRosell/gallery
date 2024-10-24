@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 // import { Calendar, Search, Settings } from "lucide-react"
 import FotosIcon2 from '@/components/SVG/FotosIcon2'
 import Lupa from '@/components/SVG/Lupa'
@@ -11,7 +14,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarRail
+  SidebarRail,
+  SidebarProvider,
+  SidebarTrigger
 } from "@/components/ui/sidebar"
 
 // Menu items.
@@ -35,7 +40,9 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const [open, setOpen] = useState<boolean>(false)
   return (
+    <SidebarProvider open={open} onOpenChange={setOpen}>
     <Sidebar variant="floating" collapsible='icon'>
       <SidebarContent>
         <SidebarGroup>
@@ -58,5 +65,7 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
+    <SidebarTrigger />
+    </SidebarProvider>
   )
 }

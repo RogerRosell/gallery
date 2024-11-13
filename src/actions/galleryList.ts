@@ -48,7 +48,16 @@ async function readDirectoryWithMetadata(
 }
 
 const getImageMetadata = async (imagePath: string) => {
+  // console.log("imagePath >> ", imagePath);
   const metadata = await sharp(imagePath).metadata();
+  // sharp(imagePath)
+  //   .raw()
+  //   .toBuffer({ resolveWithObject: true })
+  //   .then(({ data, info }) => {
+  //       console.log("imagePath >> ", imagePath);
+  //       console.log("data >> ", data);
+  //       console.log("info >> ", info);
+  //   });
   const width = metadata.width;
   const height = metadata.height;
   const keywords = metadata.iptc ? iptc(metadata.iptc).keywords : [];

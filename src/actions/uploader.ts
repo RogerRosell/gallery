@@ -16,6 +16,9 @@ const uploadFile = async (imageFile: { name: string }, imageBuffer: Buffer) => {
 }
 
 export async function handleUpload(formData: FormData) {
+  for (const entry of formData.entries()) {
+    console.log(entry);
+  }
   const imageFiles = formData.getAll('image');
   // console.log("imageFiles", imageFiles);
   const allowedFiles = ['png', 'jpeg', 'jpg', 'gif'];

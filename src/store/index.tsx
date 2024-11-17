@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { devtools } from 'zustand/middleware'
 import { immer } from 'zustand/middleware/immer'
-// import { filterImagesByKeywords } from '@/store/filterUtils'
 import { TImage } from '@/dataModel/image'
 
 type FAlbumState =  {
@@ -15,6 +14,7 @@ type FAlbumState =  {
 
 type FAlbumActions = {
   setFilterData : (data: object) => void;
+  setKeywords : (keywords: string[]) => void;
   setFilteredImages : (images: TImage[]) => void;
   resetFilteredImages : () => void;
 }
@@ -31,6 +31,7 @@ export const useFAlbumStore = create<FAlbumStore>()(
         allImages: [],
         filteredImages: [],
         setFilterData: (data) => set({ filterData: data }),
+        setKeywords: (keywords) => set({ keywords: keywords }),
         setFilteredImages: (images) => set({ filteredImages: images }),
         resetFilteredImages: () => set({ filteredImages: get().allImages })
       })

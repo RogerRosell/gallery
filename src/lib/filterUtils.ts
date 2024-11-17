@@ -8,8 +8,6 @@ export const getFilterData = (images: TImage[] = []) => {
   const months = [...new Set(images.map((item) => item.date?.month))].sort();
   const years = [...new Set(images.map((item) => item.date?.year))].sort();
 
-  console.log("fullDates >>", fullDates);
-
   return { titles, places, fullDates, months, years };
 }
 
@@ -43,7 +41,6 @@ export const getImagesList = (tree:any) => {
       }
     });     
   });
-  // console.log("images", images);
   return images;
 };
 
@@ -69,7 +66,7 @@ export function getImageFilterData(item: string) {
   const month = date && date.split('_')[0] || "";
   const year = date && date.split('_')[1] || "";
 
-  console.log("date >>", date);
+  // console.log("date >>", date);
 
   const imageFilterData: TImage = {
     name: item,

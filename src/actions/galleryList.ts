@@ -18,13 +18,11 @@ async function readDirectoryWithMetadata(
     const isDirectory = fs.statSync(fullPath).isDirectory();
 
     if (isDirectory) {
-      
       const folderData = item && getFolderData(item, 'directory');
-      // console.log("folderData", folderData);
       if (typeof folderData === 'object' && folderData !== null) {
         result.push({
           ...folderData,
-          children: await readDirectoryWithMetadata(fullPath),          
+          children: await readDirectoryWithMetadata(fullPath),
         });
       } else {
         result.push({
@@ -43,32 +41,36 @@ async function readDirectoryWithMetadata(
       });
     }
   }
-  
+
   return result;
 }
 
 const getImageMetadata = async (imagePath: string) => {
-  // console.log("imagePath >> ", imagePath);
   const metadata = await sharp(imagePath).metadata();
-  // sharp(imagePath)
-  //   .raw()
-  //   .toBuffer({ resolveWithObject: true })
-  //   .then(({ data, info }) => {
-  //       console.log("imagePath >> ", imagePath);
-  //       console.log("data >> ", data);
-  //       console.log("info >> ", info);
-  //   });
   const width = metadata.width;
   const height = metadata.height;
   const keywords = metadata.iptc ? iptc(metadata.iptc).keywords : [];
-  
+
   return { width, height, keywords };
 };
 
 export async function getFullGalleryList() {
   const galleryImagesDir = path.join(process.cwd(), 'public', 'gallery-images');
+  const directory = path.join(process.cwd(),'src' ,'data', 'images.json');
+console.log(directory);
+  // const JSON_FILE = path.join(process.cwd(), 'src','data', 'images.json');
   try {
     const tree = await readDirectoryWithMetadata(galleryImagesDir);
+    const jsonTree = JSON.stringify(tree);
+    try {
+      fs.writeFileSync(directory, jsonTree);
+      console.log('data.json written correctly');
+    } catch (error) {
+      console.error(error);
+
+      throw error;
+    }
+    
     return tree;
   } catch (err) {
     console.error('Failed to read directory', err);

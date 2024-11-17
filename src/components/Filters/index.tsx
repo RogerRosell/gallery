@@ -51,10 +51,7 @@ const Filters = () => {
   const removeKeyword = (keyword: string) => {
     const updatedKeywords = activeFilters.keywords.filter(k => k !== keyword);
     const newFilteredImages = filterImagesByKeywords(filteredImages, updatedKeywords);
-    setActiveFilters({ ...activeFilters, keywords: updatedKeywords });
-    setFilteredImages(newFilteredImages);
-    setFilterData(getFilterData(newFilteredImages));
-    setKeywords(getUniqueKeywords(newFilteredImages));
+    updateImagesAndFilters(newFilteredImages, { ...activeFilters, keywords: updatedKeywords });
   }
 
   const resetFilters = () => {
@@ -78,7 +75,7 @@ const Filters = () => {
       {filterData.years && <FilterSelect id={"any"} value={activeFilters.any} values={filterData.years.filter((year: string): year is string => year !== undefined)} onChangeHandler={onChangeHandler} />}
       {keywords && keywords?.length > 0 &&
         <div>
-          <FilterSelect id={"keywords"} values={keywords.filter((keyword: string): keyword is string => keyword !== undefined)} onChangeHandler={onChangeHandler} />
+          <FilterSelect id={"keywords"} value={""} values={keywords.filter((keyword: string): keyword is string => keyword !== undefined)} onChangeHandler={onChangeHandler} />
           {activeFilters.keywords.length > 0 &&
             <KeywordsList keywords={[...activeFilters.keywords]} removeKeyword={removeKeyword} />
           }

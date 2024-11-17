@@ -2,15 +2,17 @@ import { getServerSession } from 'next-auth';
 
 import Filters from '@/components/Filters';
 import { Gallery } from '@/components/Gallery';
-import { getFullGalleryList } from '@/actions/galleryList';
+// import { getFullGalleryList } from '@/actions/galleryList';
 import AppInitialiser from '@/lib/AppInitialiser';
 import { getImagesList, getFilterData, getUniqueKeywords } from '@/lib/filterUtils';
+import imagesJSON from '@/data/images.json';
 // import Timeline from '@/components/Timeline';
 
 export default async function Home() {
   try {
     const session = await getServerSession();
-    const initTree = await getFullGalleryList();
+    const initTree = imagesJSON;
+    // const initTree2 = await getFullGalleryList();
 
     const images = initTree && initTree.length > 0 && getImagesList(initTree);
     const filterData = images ? getFilterData(images) : undefined;

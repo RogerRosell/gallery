@@ -9,6 +9,7 @@ export const ImageModel = z.object({
   height: z.number().optional(),
   keywords: z.array(z.string()).optional(),
   date: z.object({
+    fullDate: z.string().optional(),
     month: z.string().optional(),
     year: z.string().optional()
   }).optional(),

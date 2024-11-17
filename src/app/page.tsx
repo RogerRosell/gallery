@@ -5,6 +5,7 @@ import { Gallery } from '@/components/Gallery';
 import { getFullGalleryList } from '@/actions/galleryList';
 import AppInitialiser from '@/lib/AppInitialiser';
 import { getImagesList, getFilterData, getUniqueKeywords } from '@/lib/filterUtils';
+// import Timeline from '@/components/Timeline';
 
 export default async function Home() {
   try {
@@ -14,7 +15,6 @@ export default async function Home() {
     const images = initTree && initTree.length > 0 && getImagesList(initTree);
     const filterData = images ? getFilterData(images) : undefined;
     const keywords = images ? getUniqueKeywords(images) : undefined;
-
 
     return (
       <main>
@@ -28,11 +28,14 @@ export default async function Home() {
                 allImages={images}
                 filteredImages={images}
               >
+                <div className="flex">
                 <div>
                   <div className="flex gap-4">
                     <Filters />
                   </div>
                   <Gallery />
+                </div>
+                {/* <div className="border right-0 h-screen fixed w-[80px]"><Timeline /></div> */}
                 </div>
               </AppInitialiser>
             )}

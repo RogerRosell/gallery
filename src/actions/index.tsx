@@ -24,6 +24,7 @@ export function getFolderData(item: string, type: string = 'directory'): TFolder
     title: title,
     place: place,
     date: {
+      fullDate: date,
       year: year,
       month: month
     }

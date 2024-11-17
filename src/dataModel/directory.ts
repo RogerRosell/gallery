@@ -9,6 +9,7 @@ export const FolderModel = z.object({
   title: z.string().optional(),
   place: z.string().optional(),
   date: z.object({    
+    fullDate: z.string().optional(),
     month: z.string().optional(),
     year: z.string().optional()
   }).optional(),  

@@ -1,4 +1,5 @@
 'use client';
+
 import { useState } from 'react';
 import { FilterSelect } from '@/components/FilterSelect';
 import { useFAlbumStore } from '@/store';
@@ -73,9 +74,9 @@ return true;
 
   return (
     <>
-    {filterData.titles && <FilterSelect id={"event"} values={filterData.titles.filter((title:string): title is string => title !== undefined)} onChangeHandler={onChangeHandler} />}
-    {filterData.places && <FilterSelect id={"lloc"} values={filterData.places.filter((place:string): place is string => place !== undefined)} onChangeHandler={onChangeHandler} />}
-    {filterData.years && <FilterSelect id={"any"} values={filterData.years.filter((year:string): year is string => year !== undefined)} onChangeHandler={onChangeHandler} />}  
+    {filterData.titles && <FilterSelect id={"event"} value={activeFilters.event} values={filterData.titles.filter((title:string): title is string => title !== undefined)} onChangeHandler={onChangeHandler} />}
+    {filterData.places && <FilterSelect id={"lloc"} value={activeFilters.lloc} values={filterData.places.filter((place:string): place is string => place !== undefined)} onChangeHandler={onChangeHandler} />}
+    {filterData.years && <FilterSelect id={"any"} value={activeFilters.any} values={filterData.years.filter((year:string): year is string => year !== undefined)} onChangeHandler={onChangeHandler} />}  
     {keywords && keywords?.length > 0 && 
     <div>
       <FilterSelect id={"keywords"} values={keywords.filter((keyword:string): keyword is string => keyword!== undefined)} onChangeHandler={onChangeHandler} />

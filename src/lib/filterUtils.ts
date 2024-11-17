@@ -4,10 +4,13 @@ export const getFilterData = (images: TImage[] = []) => {
 
   const titles = [...new Set(images.map((item) => item.title))].sort();
   const places = [...new Set(images.map((item) => item.place))].sort();
+  const fullDates = [...new Set(images.map((item) => item.date?.fullDate))].sort();
   const months = [...new Set(images.map((item) => item.date?.month))].sort();
   const years = [...new Set(images.map((item) => item.date?.year))].sort();
 
-  return { titles, places, months, years };
+  console.log("fullDates >>", fullDates);
+
+  return { titles, places, fullDates, months, years };
 }
 
 export const filterImages = (images: TImage[], filters: { event: string, lloc: string, any: string }): TImage[] => {
@@ -66,12 +69,15 @@ export function getImageFilterData(item: string) {
   const month = date && date.split('_')[0] || "";
   const year = date && date.split('_')[1] || "";
 
+  console.log("date >>", date);
+
   const imageFilterData: TImage = {
     name: item,
     type: 'file',
     title: title,
     place: place,
     date: {
+      fullDate: date,
       year: year,
       month: month
     }
